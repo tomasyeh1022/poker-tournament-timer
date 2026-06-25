@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Poker Tournament Timer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell settings-open" id="appShell">
+      <section class="main-panel" aria-label="Poker tournament timer">
+        <div class="display-card">
+          <header class="display-top">
+            <div class="top-info">
+              <span>Current Time</span>
+              <strong id="currentTime">--:--:--</strong>
+            </div>
+            <button id="toggleSettingsBtn" type="button">Hide Settings</button>
+            <label class="switch-control">
+              <span>Sound</span>
+              <input id="soundToggle" type="checkbox" checked />
+              <i aria-hidden="true"></i>
+            </label>
+          </header>
+
+          <section class="clock-face">
+            <div class="level-display contrast-text" id="levelLabel">Level 1</div>
+            <div class="time-display contrast-text" id="timeDisplay">20:00</div>
+          </section>
+
+          <section class="blind-summary">
+            <div class="metric metric-ante">
+              <span>Ante</span>
+              <strong id="ante">0</strong>
+            </div>
+            <div class="metric metric-small">
+              <span>Small Blind</span>
+              <strong id="smallBlind">25</strong>
+            </div>
+            <div class="metric metric-big">
+              <span>Big Blind</span>
+              <strong id="bigBlind">50</strong>
+            </div>
+          </section>
+
+          <footer class="display-bottom">
+            <div id="nextLevel">Next Level: 50 / 100 / Ante 0</div>
+          </footer>
+
+          <span class="sr-only" id="elapsedTime">00:00:00</span>
+          <span class="sr-only" id="nextBreakTime">--:--:--</span>
+        </div>
+
+        <div class="controls" aria-label="Timer controls">
+          <button class="primary-action" id="startPauseBtn" type="button">
+            <span id="startPauseIcon" aria-hidden="true">&gt;</span>
+            <span id="startPauseText">Start</span>
+          </button>
+          <button id="prevBtn" type="button">Previous Level</button>
+          <button id="nextBtn" type="button">Next Level</button>
+          <button id="resetBtn" type="button">Reset</button>
+          <button id="fullscreenBtn" type="button">Fullscreen</button>
+          <span class="status-pill" id="statusText">Ready</span>
+        </div>
+      </section>
+
+      <aside class="settings-panel" aria-label="Blind settings">
+        <div class="panel-heading">
+          <div>
+            <p>Blind Structure</p>
+            <h2>Settings</h2>
+          </div>
+          <div class="panel-buttons">
+            <button id="addBreakBtn" type="button">Add Break</button>
+            <button id="addLevelBtn" type="button">Add Level</button>
+          </div>
+        </div>
+
+        <section class="current-editor" aria-label="Current level settings">
+          <div class="editor-title">
+            <strong>Current Level</strong>
+            <span id="editorHint">Edit the current level, then apply it.</span>
+          </div>
+
+          <label>
+            <span>Minutes</span>
+            <input id="currentMinutes" type="number" min="1" max="120" value="20" />
+          </label>
+          <label>
+            <span>Small Blind</span>
+            <input id="currentSmall" type="number" min="0" value="25" />
+          </label>
+          <label>
+            <span>Big Blind</span>
+            <input id="currentBig" type="number" min="0" value="50" />
+          </label>
+          <label>
+            <span>Ante</span>
+            <input id="currentAnte" type="number" min="0" value="0" />
+          </label>
+
+          <div class="auto-tools">
+            <label class="toggle-row">
+              <input id="autoBigToggle" type="checkbox" checked />
+              <span>Auto big blind = small blind x 2</span>
+            </label>
+            <label class="switch-control settings-switch">
+              <span>Ante</span>
+              <input id="anteToggle" type="checkbox" checked />
+              <i aria-hidden="true"></i>
+            </label>
+            <button id="doubleCurrentBtn" type="button">Calculate Big Blind</button>
+            <button id="applyCurrentBtn" type="button">Apply Current Level</button>
+            <button class="accent-action" id="cascadeLevelsBtn" type="button">Double Following Levels</button>
+          </div>
+        </section>
+
+        <div class="quick-card">
+          <label>
+            <span>All Level Minutes</span>
+            <input id="defaultMinutes" type="number" min="1" max="120" value="20" />
+          </label>
+          <button id="applyMinutesBtn" type="button">Apply To All</button>
+        </div>
+
+        <div class="schedule-head" aria-hidden="true">
+          <span>#</span>
+          <span>Type</span>
+          <span>Min</span>
+          <span>Small</span>
+          <span>Big</span>
+          <span>Ante</span>
+        </div>
+        <div class="schedule-list" id="scheduleList"></div>
+      </aside>
+    </main>
+
+    <script src="app.js?v=20260625-1705"></script>
+  </body>
+</html>
