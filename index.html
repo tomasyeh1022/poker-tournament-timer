@@ -1,140 +1,101 @@
 <!doctype html>
-<html lang="zh-Hant">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Poker Tournament Timer</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main class="app-shell settings-open" id="appShell">
-      <section class="main-panel" aria-label="Poker tournament timer">
-        <div class="display-card">
-          <header class="display-top">
-            <div class="top-info">
-              <span>Current Time</span>
-              <strong id="currentTime">--:--:--</strong>
-            </div>
-            <button id="toggleSettingsBtn" type="button">Hide Settings</button>
-            <label class="switch-control">
-              <span>Sound</span>
-              <input id="soundToggle" type="checkbox" checked />
-              <i aria-hidden="true"></i>
-            </label>
-          </header>
-
-          <section class="clock-face">
-            <div class="level-display contrast-text" id="levelLabel">Level 1</div>
-            <div class="time-display contrast-text" id="timeDisplay">20:00</div>
-          </section>
-
-          <section class="blind-summary">
-            <div class="metric metric-ante">
-              <span>Ante</span>
-              <strong id="ante">0</strong>
-            </div>
-            <div class="metric metric-small">
-              <span>Small Blind</span>
-              <strong id="smallBlind">25</strong>
-            </div>
-            <div class="metric metric-big">
-              <span>Big Blind</span>
-              <strong id="bigBlind">50</strong>
-            </div>
-          </section>
-
-          <footer class="display-bottom">
-            <div id="nextLevel">Next Level: 50 / 100 / Ante 0</div>
-          </footer>
-
-          <span class="sr-only" id="elapsedTime">00:00:00</span>
-          <span class="sr-only" id="nextBreakTime">--:--:--</span>
-        </div>
-
-        <div class="controls" aria-label="Timer controls">
-          <button class="primary-action" id="startPauseBtn" type="button">
-            <span id="startPauseIcon" aria-hidden="true">&gt;</span>
-            <span id="startPauseText">Start</span>
-          </button>
-          <button id="prevBtn" type="button">Previous Level</button>
-          <button id="nextBtn" type="button">Next Level</button>
-          <button id="resetBtn" type="button">Reset</button>
-          <button id="fullscreenBtn" type="button">Fullscreen</button>
-          <span class="status-pill" id="statusText">Ready</span>
-        </div>
-      </section>
-
-      <aside class="settings-panel" aria-label="Blind settings">
-        <div class="panel-heading">
-          <div>
-            <p>Blind Structure</p>
-            <h2>Settings</h2>
-          </div>
-          <div class="panel-buttons">
-            <button id="addBreakBtn" type="button">Add Break</button>
-            <button id="addLevelBtn" type="button">Add Level</button>
-          </div>
-        </div>
-
-        <section class="current-editor" aria-label="Current level settings">
-          <div class="editor-title">
-            <strong>Current Level</strong>
-            <span id="editorHint">Edit the current level, then apply it.</span>
-          </div>
-
-          <label>
-            <span>Minutes</span>
-            <input id="currentMinutes" type="number" min="1" max="120" value="20" />
-          </label>
-          <label>
-            <span>Small Blind</span>
-            <input id="currentSmall" type="number" min="0" value="25" />
-          </label>
-          <label>
-            <span>Big Blind</span>
-            <input id="currentBig" type="number" min="0" value="50" />
-          </label>
-          <label>
-            <span>Ante</span>
-            <input id="currentAnte" type="number" min="0" value="0" />
-          </label>
-
-          <div class="auto-tools">
-            <label class="toggle-row">
-              <input id="autoBigToggle" type="checkbox" checked />
-              <span>Auto big blind = small blind x 2</span>
-            </label>
-            <label class="switch-control settings-switch">
-              <span>Ante</span>
-              <input id="anteToggle" type="checkbox" checked />
-              <i aria-hidden="true"></i>
-            </label>
-            <button id="doubleCurrentBtn" type="button">Calculate Big Blind</button>
-            <button id="applyCurrentBtn" type="button">Apply Current Level</button>
-            <button class="accent-action" id="cascadeLevelsBtn" type="button">Double Following Levels</button>
-          </div>
-        </section>
-
-        <div class="quick-card">
-          <label>
-            <span>All Level Minutes</span>
-            <input id="defaultMinutes" type="number" min="1" max="120" value="20" />
-          </label>
-          <button id="applyMinutesBtn" type="button">Apply To All</button>
-        </div>
-
-        <div class="schedule-head" aria-hidden="true">
-          <span>#</span>
-          <span>Type</span>
-          <span>Min</span>
-          <span>Small</span>
-          <span>Big</span>
-          <span>Ante</span>
-        </div>
-        <div class="schedule-list" id="scheduleList"></div>
-      </aside>
-    </main>
-
-    <script src="app.js?v=20260625-1705"></script>
-  </body>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080d12">
+  <meta name="description" content="德撲限時錦標賽計時器：中央本級倒數、整場時間、升盲表與名次獎勵。">
+  <title>德撲限時錦標賽計時器</title>
+  <link rel="stylesheet" href="styles.css?v=20260915-6">
+</head>
+<body>
+<div class="app-shell settings-closed" id="appShell">
+ <main class="shell" aria-label="德撲限時錦標賽計時器">
+  <header class="top">
+   <div class="brand"><div class="wall"><span>現在時間</span><strong class="num" id="currentTime">--:--:--</strong></div><h1 lang="en">Poker Tournament Timer</h1></div>
+   <div class="top-tools">
+    <label class="switch-control"><span>音效</span><input id="soundToggle" type="checkbox" checked><i aria-hidden="true"></i></label>
+    <button id="toggleSettingsBtn" type="button" aria-expanded="false" aria-controls="settingsPanel">升盲設定</button>
+    <button class="gold" id="editPrizes" type="button">獎勵設定</button>
+    <button id="fullscreenBtn" type="button">全螢幕 ↗</button>
+   </div>
+  </header>
+  <div class="board">
+   <section class="timer-core" aria-label="本級時間與盲注">
+    <div class="timer-top"><span class="level num" id="levelLabel">Level 01</span><span class="state" id="statusText">準備開始</span></div>
+    <div class="clock num" id="timeDisplay" role="timer" aria-label="本級剩餘時間">20:00</div>
+    <div class="main-caption" id="levelCaption">本級剩餘時間</div>
+    <div class="blinds"><div class="blind"><span>Small Blind</span><strong class="num" id="smallBlind">25</strong></div><div class="blind"><span>Big Blind</span><strong class="num" id="bigBlind">50</strong></div><div class="blind"><span>Ante</span><strong class="num" id="ante">10</strong></div></div>
+    <div class="notice" id="notice"></div>
+   </section>
+   <aside class="details" aria-label="其他賽事資訊">
+    <div class="detail total-detail"><span class="detail-label">整場剩餘</span><strong class="num" id="tournamentTime" role="timer" aria-label="整場剩餘時間">--:--:--</strong><small>休息與暫停不計時</small></div>
+    <div class="detail"><span class="detail-label" id="nextLevelLabel">Next Level</span><strong class="num" id="nextLevel">50 / 100</strong><small id="nextAnte">Ante 20</small></div>
+    <div class="detail"><span class="detail-label" id="restLabel">距離休息</span><strong class="num" id="nextBreakTime">--:--</strong><small id="restNote"></small></div>
+    <div class="detail"><span class="detail-label" id="endLabel">開始後預計結束</span><strong class="num" id="estimatedEndTime">--:--</strong><small id="endNote"></small></div>
+   </aside>
+   <aside class="prizes" id="prizes" aria-label="獎池與名次獎勵">
+    <div class="pool-heading"><h2>總獎池</h2></div>
+    <div class="pool-amount"><span class="pool-unit" id="poolUnit"></span><strong class="pool-number num empty" id="poolNumber">獎池待設定</strong></div>
+    <div class="payout-heading"><h3>名次獎勵</h3><span id="payoutMode"></span></div>
+    <ol class="payout-list" id="payoutList"><li class="empty-payout"><strong>名次獎勵待設定</strong><span>設定總獎池與分配方式後顯示。</span></li></ol>
+    <p class="prize-foot" id="prizeFoot">設定只保存在目前瀏覽器，不會同步其他人或裝置。</p>
+   </aside>
+  </div>
+  <footer class="controls-bar"><div class="controls">
+   <button class="primary" id="startPauseBtn" type="button"><span id="startPauseIcon" aria-hidden="true">▶</span> <span id="startPauseText">開始計時</span></button>
+   <button id="prevBtn" type="button">← 上一級</button><button id="nextBtn" type="button">下一級 →</button><button class="muted-button" id="resetBtn" type="button">重設計時</button>
+  </div><div class="hint">空白鍵暫停／繼續 · 全螢幕隱藏控制列<br>盲注表與獎勵自動保存；重新整理會重設計時</div></footer>
+  <span class="sr-only" id="elapsedTime"></span>
+ </main>
+ <aside class="settings-panel" id="settingsPanel" aria-label="升盲設定">
+  <div class="panel-head"><div><span class="eyebrow">TOURNAMENT SETTINGS</span><h2>升盲設定</h2></div><button id="closeSettingsBtn" type="button">收合</button></div>
+  <p class="rule-note" id="tournamentRuleNote">整場時間依盲注級別加總；暫停和休息不扣整場時間。休息仍有自己的倒數，預計結束時間會包含休息。</p>
+  <div class="schedule-options" aria-label="盲注計算方式">
+   <label class="switch-control"><span>大盲自動設為小盲的 2 倍</span><input id="autoBigToggle" type="checkbox" checked><i aria-hidden="true"></i></label>
+   <label class="switch-control"><span>啟用 Ante</span><input id="anteToggle" type="checkbox" checked><i aria-hidden="true"></i></label>
+  </div>
+  <section class="quick-settings" aria-labelledby="quickSettingsTitle">
+   <h3 id="quickSettingsTitle">快速調整整張表</h3>
+   <p class="quick-intro">設定第一級盲注，後續逐級加倍。</p>
+   <div class="ante-mode-row"><span id="anteModeLabel">Ante 計算</span><div class="segmented-control" role="group" aria-labelledby="anteModeLabel"><button id="anteAutoBtn" type="button" aria-pressed="true">自動 <small>大盲 ÷ 5</small></button><button id="anteCustomBtn" type="button" aria-pressed="false">自訂</button></div></div>
+   <div class="quick-grid">
+    <label for="quickSmall"><span class="field-label">第一級小盲</span><input id="quickSmall" type="number" min="0" max="49999999" step="1" value="25" inputmode="numeric"></label>
+    <label for="quickBig"><span class="field-label">第一級大盲 <small>小盲 × 2</small></span><input id="quickBig" type="number" value="50" readonly aria-label="第一級大盲，自動計算"></label>
+    <label for="defaultMinutes"><span class="field-label">每級時間 <small>分鐘</small></span><input id="defaultMinutes" type="number" min="1" max="120" step="1" value="20" inputmode="numeric"></label>
+    <label for="quickAnte"><span class="field-label">第一級 Ante</span><input id="quickAnte" type="number" min="0" max="99999999" step="1" value="10" readonly inputmode="numeric"><output id="quickAnteOff" class="quick-off" hidden>OFF</output></label>
+   </div>
+   <div class="quick-preview"><span class="eyebrow">盲注預覽 · 小盲 / 大盲 / Ante</span><p id="quickPreview"></p></div>
+   <p class="form-note quick-apply-note">套用會更新所有盲注級別，休息維持原設定。自訂 Ante 也會逐級加倍，套用後可在表格個別修改。</p>
+   <button id="applyMinutesBtn" class="quick-apply" type="button">套用整張升盲表 <span aria-hidden="true">↗</span></button>
+   <p id="quickMessage" class="quick-message" role="status" aria-live="polite"></p>
+  </section>
+  <section aria-labelledby="scheduleTitle"><div class="schedule-tools"><h3 id="scheduleTitle">升盲表</h3><div><button id="addBreakBtn" type="button">＋ 休息</button><button id="addLevelBtn" type="button">＋ 級別</button></div></div>
+   <p class="table-hint">直接修改表格即可儲存；修改時會暫停計時。Ante 選「自訂」可逐級輸入。</p>
+   <div class="schedule-scroller"><div class="schedule-head" aria-hidden="true"><span>#</span><span>類型</span><span>分鐘</span><span>小盲</span><span>大盲</span><span>Ante</span><span></span></div><div id="scheduleList" class="schedule-list"></div></div>
+   <p class="form-note">修改目前級別的分鐘會重新倒數；其他級別的時間可以各自設定。</p>
+  </section>
+  <div class="audio-tools"><div class="voice-heading"><span>英文語音</span><strong>Google · English US</strong></div><button id="testSoundBtn" type="button">試聽語音與提示音</button><p class="form-note" id="audioNote">英文提醒：10、5、3、1 分鐘及最後 5 秒；升級後播放提示音。</p><p class="form-note">試聽會播放開場、1 分鐘提醒、5 秒倒數與換級聲。比賽中，剩餘時間經過提醒點才播報。</p><p id="audioStatus" class="audio-status" role="status" aria-live="polite"></p></div>
+  <p class="form-note">升盲表與 Ante 設定保存在目前瀏覽器。重新整理會回到第一級，賽事進行中請保持此頁開啟。</p>
+ </aside>
+</div>
+<button class="exit-display" id="exitDisplay" type="button">返回操作 · Esc</button>
+<div class="toast" id="toast" role="status"></div>
+<dialog id="prizeDialog" aria-labelledby="prizeTitle">
+ <form id="prizeForm" novalidate>
+  <div class="dialog-head"><div><h2 id="prizeTitle">獎池與獎勵設定</h2><p>輸入總獎池，依固定比例或金額設定各名次獎勵。</p></div><button type="button" id="closePrizes">關閉</button></div>
+  <div class="field-row"><label><span class="field-label">總獎池</span><input id="poolInput" type="number" min="1" max="999999999" step="1" inputmode="numeric" placeholder="尚未設定" aria-describedby="formMessage"></label><label><span class="field-label">顯示單位</span><select id="unitInput"><option value="NT$">NT$</option><option value="點">點</option><option value="籌碼">籌碼</option></select></label><label><span class="field-label">獎勵名次</span><select id="countInput"><option value="1">1 名</option><option value="2">2 名</option><option value="3" selected>3 名</option><option value="4">4 名</option><option value="5">5 名</option><option value="6">6 名</option></select></label></div>
+  <fieldset class="mode-switch"><legend>分配方式</legend><label><input type="radio" name="mode" value="percent" checked>固定比例</label><label><input type="radio" name="mode" value="amount">固定金額</label></fieldset>
+  <div class="editor-head"><span>名次</span><span id="inputHeading">分配比例</span><span style="text-align:right">預覽獎勵</span></div><div id="rewardEditor"></div>
+  <p class="form-message" id="formMessage" role="status"></p>
+  <p class="form-note" id="roundingNote">比例須合計 100%。金額以整數顯示，尾數依小數餘額大小補足；餘額相同時由較前名次優先，確保合計等於獎池。</p>
+  <p class="form-note">金額換成比例時，以 0.01% 近似，換算後金額可能略有差異。切換模式會保留兩邊各自的草稿；請確認預覽金額後套用。</p>
+  <p class="form-note">設定只保存在目前瀏覽器，不會同步其他人或裝置。</p>
+  <div class="dialog-footer"><button type="button" class="muted-button" id="clearPrizesBtn">清空設定</button><div><button type="button" id="cancelPrizes">取消</button><button type="submit" class="apply" id="applyPrizes">儲存並套用</button></div></div>
+ </form>
+</dialog>
+<noscript>請啟用瀏覽器 JavaScript，才能使用計時器。</noscript>
+<script src="app.js?v=20260915-6"></script>
+<script src="prizes.js?v=20260915-6"></script>
+</body>
 </html>

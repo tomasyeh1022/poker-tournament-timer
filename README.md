@@ -1,34 +1,54 @@
-# Poker Tournament Timer
+# 德撲限時錦標賽計時器
 
-A fullscreen Texas Hold'em tournament timer for blind levels, breaks, antes, and voice reminders.
+中央放最大的本級倒數；左側顯示整場剩餘、下一級、距離休息與預計結束；右側顯示總獎池與名次獎勵。
 
-## Features
+## 開始使用
 
-- Large fullscreen tournament clock
-- Current level, current blinds, ante, and next level display
-- Editable blind structure
-- Add break levels
-- Auto-calculate big blind as 2x small blind
-- Auto-double following blind levels
-- Optional ante calculation at 1/5 of the big blind
-- Sound toggle
-- English voice reminders at 10, 5, 3, and 1 minute remaining
-- Final 5-second countdown
-- Level-start chime sound
+保留整個資料夾，使用 Chrome 或 Edge 開啟 `index.html`。不用安裝、不用登入。若下載 ZIP，請先全部解壓縮，再開啟裡面的 `index.html`。
 
-## Use Locally
+1. 按「升盲設定」，直接在升盲表編輯各級分鐘、小盲、大盲或新增休息；移開欄位後自動儲存。
+2. 按「獎勵設定」，輸入總獎池、顯示單位與 1～6 個獎勵名次，選擇固定比例或固定金額，按「儲存並套用」。
+3. 在升盲設定按「試聽語音與提示音」，確認裝置的音量與英文語音。
+4. 收合設定，按「開始」。需要展示時按「全螢幕」；按 Esc 或右下角「返回操作」回到控制畫面。
 
-Open `index.html` in a browser.
+空白鍵可暫停／繼續；編輯欄位、按鈕或獎勵視窗取得焦點時，不會觸發全域快捷鍵。
 
-## Publish With GitHub Pages
+## 時間規則
 
-1. Create a new GitHub repository.
-2. Upload everything in this folder to the repository root.
-3. Go to `Settings` -> `Pages`.
-4. Under `Build and deployment`, choose `Deploy from a branch`.
-5. Choose branch `main` and folder `/root`.
-6. Save.
+- 整場剩餘 = 目前盲注級別剩餘 + 後續盲注級別時間，不計休息。
+- 暫停會停止兩個倒數。休息時中央倒數休息時間，整場剩餘維持不變。
+- 最後一個盲注級別歸零就結束。升盲表末尾沒有後續盲注的休息不執行，也不算入預計結束時間。
+- 預計結束時間包含賽事中間的排定休息；暫停時顯示現在恢復後的預估時間。跨日時會標示日期。
+- 上一級／下一級會暫停，所選級別從設定時間重新倒數，整場剩餘也跟著升盲表重算。
+- 修改表格會暫停計時。修改目前級別的分鐘會重設本級倒數；編輯其他級別不重設目前倒數。快速套用整張表時，只有目前盲注級別的分鐘實際改變才重新倒數；只改籌碼數值會保留剩餘時間。
+- 原有預設結構共 9 個 20 分鐘盲注級別，中間有一次 10 分鐘休息；整場比賽時間為 3 小時。
 
-Your site will usually be available at:
+## 盲注與音效
 
-`https://your-username.github.io/your-repository-name/`
+- 啟用自動大盲時，編輯小盲會將該列的大盲改成小盲 × 2；關閉後可以分別輸入小盲與大盲。切換開關不會批次改寫已設定的盲注。
+- 升盲表上方的「快速調整整張表」可設定第一級小盲與統一每級時間。大盲自動算成小盲 × 2，後續盲注逐級加倍；休息不算級數，且保留原本時間。先看前三級預覽，再按「套用整張升盲表」。若後續數值超出上限，會提示並保留原表。
+- Ante 可選「自動」（大盲 ÷ 5，四捨五入）或「自訂」。自訂時輸入第一級 Ante，快速套用後也會逐級加倍；表格中的 Ante 可再逐級修改。切換自動／自訂會保留自訂數字。
+- Ante 關閉時主畫面、預覽與表格顯示 **OFF**，休息時顯示 —；重新啟用會沿用原本計算方式。自動／自訂選擇與升盲表一起保存在目前瀏覽器。
+- 英文開場語音，以及剩餘 10、5、3、1 分鐘和最後 5 秒提醒；自動換級與手動下一級後播放原有提示音。英語提示使用 Google Translate 英文美式音色，已製作成隨程式附上的 WAV 音檔，播放不需連線，也不依賴瀏覽器是否安裝 Google 語音。
+- 提醒在倒數經過指定時間點時播放；若本級只有 1 分鐘，開始時只播開場，最後 5 秒仍會倒數。背景分頁回來時會校正時間，但不補播過期提醒。
+- 按「試聽語音與提示音」可依序聽到開場、1 分鐘、5～1 倒數和原有換級提示音；再按「停止試聽」即可中止。試聽不改計時，計時中請先暫停再試聽。
+- 暫停及關閉音效會停止播放。音檔讀取或播放失敗會嘗試瀏覽器語音備援；兩者均失敗時顯示提示。請先試聽，確認分頁沒有靜音且裝置音量正常。
+
+## 獎池與儲存
+
+- 首次使用顯示「獎池待設定」，沒有預填賽事獎金。
+- 支援 NT$、點、籌碼。總獎池及固定金額為正整數；固定比例最多兩位小數，合計須為 100%。
+- 分配金額合計必須等於總獎池。比例換算的整數尾差依小數餘額補足，餘額相同由較前名次優先。
+- 切換比例／金額保留各自草稿。取消、關閉或 Esc 不會儲存草稿。
+- 清空需先按「清空設定」，再按「確認清空設定」。只清空獎勵，不影響升盲表。
+- 升盲表、Ante 與獎勵保存在目前瀏覽器，不會同步其他裝置或其他網址。瀏覽器阻擋儲存時會提示。
+- **重新整理或重開網頁會重設計時，回到第一級。** 升盲與獎勵設定仍保留。賽事進行中請保持此頁開啟。
+- 計時依實際經過時間補算；電腦睡眠或背景分頁可能延遲聲音與畫面更新，喚醒後會校正倒數。比賽期間請保持裝置喚醒。
+
+## 開發驗證
+
+純 HTML、CSS、JavaScript，無額外套件。以 Node.js 執行 `node --test tests/*.test.cjs` 可驗證時間邊界與獎勵計算。
+
+介面小字使用本地 Manrope 與 Noto Sans TC，中央倒數保留 Bahnschrift 字體。字體來源及開源授權保留於 `assets/fonts/`，離線使用不需下載遠端字體。
+
+英文音檔透過 gTTS 取得 Google Translate 英文美式音色，只修剪首尾靜音並轉成 WAV。此來源沒有指定性別或聲音名稱的參數；請用「試聽」確認音色。生成方式及來源保留於 `assets/voice/SOURCES.md`。配送包只含輸出音檔，沒有語音引擎或 API 金鑰。

@@ -1,0 +1,24 @@
+{
+  "Manrope": {
+    "file": "Manrope-UI.woff2",
+    "bytes": 51496,
+    "unicode_count": 678,
+    "axes": {
+      "wght": [
+        200.0,
+        800.0
+      ]
+    }
+  },
+  "NotoSansTC": {
+    "file": "NotoSansTC-UI.woff2",
+    "bytes": 182548,
+    "unicode_count": 625,
+    "axes": {
+      "wght": [
+        100.0,
+        900.0
+      ]
+    }
+  }
+}
